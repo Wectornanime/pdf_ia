@@ -1,17 +1,13 @@
 from dotenv import load_dotenv
-from services.gemini_service import GeminiService
+from fastapi import FastAPI
+
+from controllers.create_session_controller import CreateSessionController
+
+from models.session_model import CreateSessionModel
 
 load_dotenv()
+app = FastAPI()
 
-contents = list()
-
-while(True):
-    ask = input('Sua pergunta: ')
-    if ask == '':
-        print('BYE!')
-        break
-
-    contents.append(f'USER: {ask}')
-    resp = GeminiService.do_ask(contents)
-    print(f'Resposta: {resp}')
-    contents.append(f'MODEL: {resp}')
+@app.post('/session')
+def post_session(data: CreateSessionModel):
+    return CreateSessionController.handle(data)
