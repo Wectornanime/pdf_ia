@@ -8,5 +8,5 @@ class GeminiService:
             model="gemini-2.5-flash",
             contents=contents
         )
-        
+
         return response.text
