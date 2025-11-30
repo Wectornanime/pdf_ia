@@ -42,3 +42,17 @@ class SupabaseService:
             .execute()
         )
         return resultado
+
+    def get_session_messages(self, session_id):
+        try:
+            resultado = (
+                self.supabase
+                .table('messages')
+                .select('*')
+                .eq('session_id', session_id)
+                .order('created_at', desc=False)
+                .execute()
+            )
+            return resultado.data or []
+        except:
+            return []
