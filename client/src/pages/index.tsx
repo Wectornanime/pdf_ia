@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 import { Textarea } from "@heroui/input";
 import { ScrollShadow } from "@heroui/scroll-shadow";
 import { Card, CardBody } from "@heroui/card";
 import { Button } from "@heroui/button";
 import { Spinner } from "@heroui/spinner";
 import ReactMarkdown from "react-markdown";
-import { ArrowUpwardRounded as ArrowUpwardRoundedIcon } from "@mui/icons-material";
+import {
+  ArrowUpwardRounded as ArrowUpwardRoundedIcon,
+  AttachFileRounded as AttachFileRoundedIcon,
+} from "@mui/icons-material";
 
 import { api } from "@/services/api";
 
@@ -15,6 +18,7 @@ export default function IndexPage() {
   const navigate = useNavigate();
 
   const [userAsk, setUserAsk] = useState<string>("");
+  const [isAnimatedChat, setIsAnimatedChat] = useState<boolean>(false);
   const [awaitingAnswer, setAwaitingAnswer] = useState<boolean>(false);
   const [messages, setMessages] = useState([
     // { id: 1, content: "Olá! Como posso ajudar?", role: "model" },
@@ -34,6 +38,8 @@ export default function IndexPage() {
       setMessages(data);
       setAwaitingAnswer(false);
     }
+
+    setIsAnimatedChat(true);
   };
 
   const sendAsk = async () => {
@@ -45,7 +51,17 @@ export default function IndexPage() {
     setAwaitingAnswer(true);
 
     if (!id) {
+      setMessages((prev) => [
+        ...prev,
+        { id: prev.length + 1, content: ask, role: "user" },
+      ]);
+
       const { data } = await api.post(`session`, { ask });
+
+      setMessages((prev) => [
+        ...prev,
+        { id: prev.length + 1, content: data.answer, role: "model" },
+      ]);
 
       navigate(`/${data.session_id}`);
     } else {
@@ -67,7 +83,7 @@ export default function IndexPage() {
 
   useEffect(() => {
     loadSession();
-  });
+  }, []);
 
   return (
     <main className="max-w-full h-full flex flex-col justify-between">
@@ -80,6 +96,7 @@ export default function IndexPage() {
                 max-w-[60%]
                 ${msg.role === "user" ? "ml-auto" : "mr-auto"}
                 ${msg.role === "user" ? "bg-primary text-white" : ""}
+                ${isAnimatedChat ? "fade-in" : ""}
               `}
             >
               <CardBody>
@@ -95,15 +112,32 @@ export default function IndexPage() {
         <Textarea
           className="w-3/4 lg:w-5/8"
           endContent={
-            <Button
-              isIconOnly
-              color="primary"
-              isLoading={awaitingAnswer}
-              onClickCapture={() => sendAsk()}
-            >
-              <ArrowUpwardRoundedIcon />
-            </Button>
+            <div className="flex gap-1">
+              {!id && (
+                <Button
+                  isIconOnly
+                  color="default"
+                  isDisabled={id ? true : false}
+                  isLoading={awaitingAnswer}
+                  size="lg"
+                  variant="light"
+                  onClickCapture={() => sendAsk()}
+                >
+                  <AttachFileRoundedIcon />
+                </Button>
+              )}
+              <Button
+                isIconOnly
+                color="primary"
+                isLoading={awaitingAnswer}
+                size="lg"
+                onClickCapture={() => sendAsk()}
+              >
+                <ArrowUpwardRoundedIcon />
+              </Button>
+            </div>
           }
+          maxRows={4}
           minRows={2}
           placeholder="Digite sua mensagem..."
           size="lg"

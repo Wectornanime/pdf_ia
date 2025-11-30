@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Chat",
   description: "Uma aplicação de teste.",
   links: {
-    github: "https://github.com/wectornanime",
+    github: "https://github.com/wectornanime/pdf_ia",
     docs: "https://heroui.com",
   },
 };
