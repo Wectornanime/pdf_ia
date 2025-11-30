@@ -56,3 +56,33 @@ class SupabaseService:
             return resultado.data or []
         except:
             return []
+        
+    def upload_file_to_bucket(self, path, file):
+        resultado = (
+            self.supabase
+            .storage.from_('ia-gemini_bucket')
+            .upload(
+                path=path,
+                file=file,
+                file_options={
+                    "content-type": "application/pdf"
+                }
+            )
+        )
+        print (resultado)
+        return resultado
+    
+    def save_chunks_into_documents(self, pdf_path, content, metadata, embedding):
+        resultado = (
+            self.supabase
+            .table('documents')
+            .insert({
+                'pdf_path': pdf_path,
+                'content': content,
+                'metadata': metadata,
+                'embedding': embedding,
+            })
+            .execute()
+        )
+        print(resultado)
+        return resultado
