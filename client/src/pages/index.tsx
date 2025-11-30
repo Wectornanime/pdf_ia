@@ -1,60 +1,56 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-import DefaultLayout from "@/layouts/default";
+import { Textarea } from "@heroui/input";
+import { ScrollShadow } from "@heroui/scroll-shadow";
+import { Card, CardBody } from "@heroui/card";
+import { Button } from "@heroui/button";
 
 export default function IndexPage() {
+  const messages = [
+    { id: 1, content: "Olá! Como posso ajudar?", role: "model" },
+    { id: 2, content: "Quero montar um layout de chat!", role: "user" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "user" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+    { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
+  ];
+
   return (
-    <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-lg text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-          <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
-          </div>
-        </div>
-
-        <div className="flex gap-3">
-          <Link
-            isExternal
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
-            href={siteConfig.links.docs}
-          >
-            Documentation
-          </Link>
-          <Link
-            isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
-          >
-            <GithubIcon size={20} />
-            GitHub
-          </Link>
-        </div>
-
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
+    <main className="max-w-full h-full flex flex-col justify-between">
+      <section className="w-7/8 mx-auto pb-20">
+        <ScrollShadow className="flex flex-col gap-2 p-4">
+          {messages.map((msg) => (
+            <Card
+              key={msg.id}
+              className={`
+                max-w-[60%]
+                ${msg.role === "user" ? "ml-auto" : "mr-auto"}
+                ${msg.role === "user" ? "bg-primary text-white" : ""}
+              `}
+            >
+              <CardBody>
+                <p>{msg.content}</p>
+              </CardBody>
+            </Card>
+          ))}
+        </ScrollShadow>
       </section>
-    </DefaultLayout>
+
+      <section className="fixed bottom-0 w-3/4 lg:w-5/8 flex justify-center py-4 border-t border-default-200">
+        <Textarea
+          className="w-3/4 lg:w-5/8"
+          endContent={<Button isIconOnly color="primary" />}
+          minRows={2}
+          placeholder="Digite sua mensagem..."
+          size="lg"
+        />
+      </section>
+    </main>
   );
 }
