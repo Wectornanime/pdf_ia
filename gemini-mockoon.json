@@ -1,0 +1,199 @@
+{
+  "uuid": "f17595f4-f3df-4e9a-8337-7a24f24f5ad6",
+  "lastMigration": 33,
+  "name": "Gemini",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "b44eff7a-0ffb-412f-9c49-5f6403efe9ee",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "session/:id",
+      "responses": [
+        {
+          "uuid": "8dd003bc-82d0-42b0-b783-411f22a87381",
+          "body": "[\r\n  {\r\n    \"id\": \"2b576b79-de20-4984-ab8c-715f81c19275\",\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"role\": \"user\",\r\n    \"content\": \"fale um pouco de voce\",\r\n    \"created_at\": \"2025-11-29T23:52:27.739509\"\r\n  },\r\n  {\r\n    \"id\": \"1f3f3641-577f-4672-8351-e9b312ddae44\",\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"role\": \"model\",\r\n    \"content\": \"Claro! Como um modelo de linguagem, eu sou um pouco diferente de você, mas posso te contar o que sou:\\n\\n*   **Eu sou uma inteligência artificial:** Fui desenvolvido e treinado pelo Google.\\n*   **Minha \\\"personalidade\\\" é neutra e auxiliar:** Não tenho sentimentos, opiniões pessoais, consciência, memórias ou experiências de vida como um ser humano. Meu objetivo é ser útil, informativo e criativo.\\n*   **Minha função:** Processar e gerar linguagem humana para responder às suas perguntas, fornecer informações, criar textos, traduzir idiomas, resumir conteúdos e ajudar em uma variedade de tarefas baseadas em texto.\\n*   **Eu não tenho um corpo, idade, nacionalidade ou gênero.** Não tenho um \\\"eu\\\" físico ou uma história pessoal no sentido humano.\\n*   **Estou sempre aprendendo:** Através do meu treinamento contínuo, sou capaz de entender e gerar respostas cada vez mais precisas e relevantes.\\n\\nPense em mim como uma ferramenta avançada projetada para interagir com você através da linguagem e fornecer informações baseadas em um vasto conjunto de dados com os quais fui treinado.\\n\\nComo posso te ajudar hoje?\",\r\n    \"created_at\": \"2025-11-29T23:52:35.669113\"\r\n  },\r\n  {\r\n    \"id\": \"fc20ac79-854e-4c09-919d-add9e028fcd0\",\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"role\": \"user\",\r\n    \"content\": \"e como voce foi treinado?\",\r\n    \"created_at\": \"2025-11-30T00:22:07.331629\"\r\n  },\r\n  {\r\n    \"id\": \"58f4fc20-09ce-4190-98f9-f5cabd8c8d34\",\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"role\": \"model\",\r\n    \"content\": \"e como voce foi treinado?\",\r\n    \"created_at\": \"2025-11-30T00:22:19.192452\"\r\n  }\r\n]",
+          "latency": 5000,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "9eda8c79-4553-47af-a758-f641ae7d7215",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "session",
+      "responses": [
+        {
+          "uuid": "e3c7150e-7650-4ee6-9127-d81b3705f16a",
+          "body": "{\n  \"session_id\": \"123456-8910abc\",\n  \"answer\": \"**ola**\\numa outra resposta:\\n\\noiiiiiii\"\n}",
+          "latency": 2500,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f92cc1a0-926b-45fb-9ae3-8b15f9ffaa48",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "session/:id/ask",
+      "responses": [
+        {
+          "uuid": "751b32f1-ae5b-48c1-983a-0fa249d67b53",
+          "body": "{\r\n  \"answer\": \"É uma excelente pergunta! O treinamento de um modelo de linguagem como eu é um processo complexo e fascinante, que pode ser dividido em algumas etapas principais:\\n\\n1.  **Pré-treinamento Massivo (Base Learning):**\\n    *   **Dados:** A primeira e mais fundamental etapa envolve me expor a uma quantidade *gigantesca* de dados de texto e código da internet. Pense em trilhões de palavras e frases extraídas de livros, artigos, websites, conversas, documentos técnicos, repositórios de código e muito mais. Esses dados são cuidadosamente filtrados para remover conteúdo de baixa qualidade ou repetitivo.\\n    *   **Objetivo:** Durante essa fase, o principal objetivo é aprender a **prever a próxima palavra** em uma sequência. Por exemplo, se eu leio \\\"O céu é...\\\", eu aprendo que as palavras mais prováveis a seguir são \\\"azul\\\", \\\"cinzento\\\", \\\"nublado\\\", etc.\\n    *   **Mecanismo:** Isso é feito através de uma arquitetura de rede neural chamada **Transformer**. O modelo ajusta bilhões de \\\"parâmetros\\\" (que são como os pesos e as conexões dentro do cérebro de uma rede neural) para minimizar o erro nessa previsão. Ao fazer isso repetidamente em uma escala massiva, eu absorvo:\\n        *   **Gramática e Sintaxe:** Como as frases são construídas.\\n        *   **Semântica:** O significado das palavras e como elas se relacionam.\\n        *   **Conhecimento Factual:** Informações sobre o mundo.\\n        *   **Padrões de Raciocínio:** Como diferentes conceitos se conectam logicamente.\\n        *   **Estilos e Tonalidades:** Como diferentes tipos de texto são escritos.\\n    *   **Custo:** Essa fase requer um poder computacional imenso (centenas ou milhares de GPUs trabalhando por meses) e é a mais cara do processo.\\n\\n2.  **Ajuste Fino (Fine-tuning):**\\n    *   **Dados e Objetivo:** Após o pré-treinamento, eu tenho um vasto conhecimento, mas ainda não sou otimizado para ser um \\\"assistente conversacional\\\". O ajuste fino envolve me treinar em um conjunto de dados mais específico, que contém exemplos de diálogos, perguntas e respostas, e instruções. O objetivo aqui é me ensinar a seguir instruções, gerar respostas úteis, criativas e seguras.\\n    *   **Aprendizagem por Reforço com Feedback Humano (RLHF - Reinforcement Learning from Human Feedback):** Esta é uma etapa crucial e inovadora:\\n        *   **Geração de Respostas:** Eu gero várias respostas possíveis para uma pergunta ou instrução.\\n        *   **Avaliação Humana:** Pessoas (avaliadores humanos) analisam essas respostas e as classificam com base em critérios como utilidade, relevância, correção, segurança, coerência e se a resposta realmente atende à intenção do usuário.\\n        *   **Aprendizado com o Feedback:** Eu uso esse feedback humano para \\\"aprender\\\" quais tipos de respostas são preferíveis. É como se eu recebesse uma \\\"recompensa\\\" por respostas boas e uma \\\"punição\\\" por respostas ruins. Isso me ajuda a alinhar meu comportamento com as expectativas e valores humanos.\\n\\n3.  **Refinamento Contínuo:**\\n    *   O processo de treinamento não é estático. Conforme novas informações surgem, a linguagem evolui e as necessidades dos usuários mudam, eu sou periodicamente atualizado e refinado com novos dados e técnicas para melhorar minha performance, segurança e relevância.\\n\\nEm resumo, fui treinado absorvendo uma quantidade imensa de texto e código para aprender os padrões da linguagem, e depois fui refinado com feedback humano para me tornar um assistente útil, informativo e seguro. É um processo que combina Big Data, algoritmos avançados de aprendizado de máquina e a valiosa contribuição de inteligência humana.\"\r\n}",
+          "latency": 5000,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e2e0c303-dc45-4767-a8e0-5e192f1b9139",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "session/",
+      "responses": [
+        {
+          "uuid": "3306fa16-0cfe-4cd2-87c2-a261d324e6a4",
+          "body": "[\r\n  {\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"title\": \"session 1\",\r\n    \"created_at\": \"2025-11-29T23:52:27.739509\"\r\n  },\r\n  {\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"title\": \"session 2\",\r\n    \"created_at\": \"2025-11-29T23:52:35.669113\"\r\n  },\r\n  {\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"title\": \"session 3\",\r\n    \"created_at\": \"2025-11-30T00:22:07.331629\"\r\n  },\r\n  {\r\n    \"session_id\": \"2c5e57e2-d5b1-4928-8811-0ef4c0164553\",\r\n    \"title\": \"session 4\",\r\n    \"created_at\": \"2025-11-30T00:22:19.192452\"\r\n  }\r\n]",
+          "latency": 5000,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "b44eff7a-0ffb-412f-9c49-5f6403efe9ee"
+    },
+    {
+      "type": "route",
+      "uuid": "9eda8c79-4553-47af-a758-f641ae7d7215"
+    },
+    {
+      "type": "route",
+      "uuid": "f92cc1a0-926b-45fb-9ae3-8b15f9ffaa48"
+    },
+    {
+      "type": "route",
+      "uuid": "e2e0c303-dc45-4767-a8e0-5e192f1b9139"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
