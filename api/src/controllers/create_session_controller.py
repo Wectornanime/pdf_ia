@@ -1,6 +1,6 @@
-from models.session_model import CreateSessionModel
-from services.supabase_sevice import SupabaseService
-from services.gemini_service import GeminiService
+from src.models.session_model import CreateSessionModel
+from src.services.supabase_sevice import SupabaseService
+from src.services.gemini_service import GeminiService
 
 class CreateSessionController:
     def handle(data: CreateSessionModel):
@@ -15,4 +15,7 @@ class CreateSessionController:
         answer = GeminiService.do_ask(contents=contents)
         supabase.save_model_message(message=answer, session=session)
 
-        return { 'sessionId': session }
+        return {
+            'sessionId': session,
+            'answer': answer,
+            }

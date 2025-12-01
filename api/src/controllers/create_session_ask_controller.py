@@ -1,7 +1,7 @@
-from services.supabase_sevice import SupabaseService
-from services.gemini_service import GeminiService as gemini
+from src.services.supabase_sevice import SupabaseService
+from src.services.gemini_service import GeminiService as gemini
 
-from models.session_model import CreateSessionAskModel
+from src.models.session_model import CreateSessionAskModel
 
 class CreateSessionAskController:
     def handle(id: str, data: CreateSessionAskModel):

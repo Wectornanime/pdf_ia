@@ -1,4 +1,4 @@
-from services.supabase_sevice import SupabaseService
+from src.services.supabase_sevice import SupabaseService
 
 class GetSessionController:
     def handle(id: str):

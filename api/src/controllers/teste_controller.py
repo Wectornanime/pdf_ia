@@ -3,8 +3,8 @@ from fastapi import UploadFile, File
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from utils.embed_text import embed_text
-from services.supabase_sevice import SupabaseService
+from src.utils.embed_text import embed_text
+from src.services.supabase_sevice import SupabaseService
 
 class TesteController:
     async def handle(file: UploadFile = File(...)):
@@ -13,7 +13,7 @@ class TesteController:
         timestamp = dt.now().timestamp()
         temp_file_name = f'{timestamp}_{file.filename}'
         temp_file_path = f'temp/{temp_file_name}'
-        
+
         with open(temp_file_path, "wb") as f:
             f.write(await file.read())
 
@@ -36,19 +36,8 @@ class TesteController:
                 metadata=chunk.metadata,
                 embedding = embed_text(chunk.page_content)
             )
+        
+        new_session = supabase.new_session(pdf_path=temp_file_name)
+        session = new_session.data[0]['id']
 
-
-
-        # # loader = PyPDFLoader(file.file)
-        # # documents = loader.load()
-        # content = await file.read()
-
-        # splitter = RecursiveCharacterTextSplitter(
-        #     chunk_size=700,
-        #     chunk_overlap=150
-        # )
-
-        # chunks = splitter.split_documents(file.file)
-        # print(f"Total de chunks: {len(chunks)}")
-
-
+        return { 'sessionId': session }

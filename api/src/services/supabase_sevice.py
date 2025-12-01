@@ -8,11 +8,11 @@ class SupabaseService:
 
         self.supabase: Client = create_client(url, key)
 
-    def new_session(self):
+    def new_session(self, pdf_path='teste'):
         resultado = (
             self.supabase
             .table('sessions')
-            .insert({'pdf_path': 'teste'})
+            .insert({'pdf_path': pdf_path})
             .execute()
         )
         return resultado
@@ -69,7 +69,6 @@ class SupabaseService:
                 }
             )
         )
-        print (resultado)
         return resultado
     
     def save_chunks_into_documents(self, pdf_path, content, metadata, embedding):
@@ -84,5 +83,28 @@ class SupabaseService:
             })
             .execute()
         )
-        print(resultado)
         return resultado
+
+    def get_chunks_by_pdf_path(self, embedded_text, pdf_path, k=5):
+        result = self.supabase.rpc(
+            "match_documents_by_pdf",
+            {
+                "query_embedding": embedded_text,
+                "match_count": k,
+                "pdf_path": pdf_path
+            }
+        ).execute()
+        return result.data
+    
+    def get_session_by_id(self, id):
+        try:
+            resultado = (
+                self.supabase
+                .table('sessions')
+                .select('*')
+                .eq('id', id)
+                .execute()
+            )
+            return resultado.data or []
+        except:
+            return []
