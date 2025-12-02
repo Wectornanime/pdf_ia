@@ -75,10 +75,10 @@ export const Navbar = () => {
                         </CardBody>
                       </Card>
                       {sessions.map((session) => (
-                        <Card key={session.session_id}>
+                        <Card key={session.id}>
                           <CardBody>
                             <Link
-                              href={session.session_id}
+                              href={session.id}
                               size="sm"
                               title={session.title}
                               onClick={onClose}

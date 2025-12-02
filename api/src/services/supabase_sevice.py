@@ -56,7 +56,7 @@ class SupabaseService:
             return resultado.data or []
         except:
             return []
-        
+
     def upload_file_to_bucket(self, path, file):
         resultado = (
             self.supabase
@@ -70,7 +70,20 @@ class SupabaseService:
             )
         )
         return resultado
-    
+
+    def list_sessions(self):
+        try:
+            result = (
+                self.supabase
+                .table('sessions')
+                .select('*')
+                .order('created_at', desc=False)
+                .execute()
+            )
+            return result.data or []
+        except:
+            return []
+
     def save_chunks_into_documents(self, pdf_path, content, metadata, embedding):
         resultado = (
             self.supabase
@@ -95,7 +108,7 @@ class SupabaseService:
             }
         ).execute()
         return result.data
-    
+
     def get_session_by_id(self, id):
         try:
             resultado = (

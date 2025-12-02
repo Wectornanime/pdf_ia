@@ -1,10 +1,11 @@
 from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile, File
-from datetime import datetime as dt
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.controllers.create_session_controller import CreateSessionController
 from src.controllers.get_session_controller import GetSessionController
 from src.controllers.create_session_ask_controller import CreateSessionAskController
+from src.controllers.list_sessions_controller import ListSessionsController
 from src.controllers.teste_controller import TesteController
 from src.controllers.teste_ask_controller import TesteAskController
 
@@ -16,9 +17,25 @@ load_dotenv()
 check_temp_path()
 app = FastAPI()
 
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,          # libera domínios específicos
+    allow_credentials=True,         # permite envio de cookies/autenticação
+    allow_methods=["*"],            # libera todos os métodos (GET, POST, etc)
+    allow_headers=["*"],            # libera todos os headers
+)
+
 @app.post('/session')
 def post_session(data: CreateSessionModel):
     return CreateSessionController.handle(data)
+
+@app.get('/session')
+def get_sessions():
+    return ListSessionsController.handle()
 
 @app.get('/session/{id}')
 def get_session_id(id: str):

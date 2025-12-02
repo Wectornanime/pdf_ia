@@ -65,7 +65,7 @@ export default function IndexPage() {
       ]);
 
       setJustCreated(true);
-      navigate(`/${data.session_id}`);
+      navigate(`/${data.sessionId}`);
     } else {
       setMessages((prev) => [
         ...prev,
