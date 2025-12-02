@@ -62,6 +62,18 @@ export const Navbar = () => {
                       Suas Seções:
                     </DrawerHeader>
                     <DrawerBody>
+                      <Card key="0">
+                        <CardBody>
+                          <Link
+                            href="/"
+                            size="sm"
+                            title="Nova seção"
+                            onClick={onClose}
+                          >
+                            <p>Criar uma nova seção</p>
+                          </Link>
+                        </CardBody>
+                      </Card>
                       {sessions.map((session) => (
                         <Card key={session.session_id}>
                           <CardBody>

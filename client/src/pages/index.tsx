@@ -20,6 +20,7 @@ export default function IndexPage() {
   const [userAsk, setUserAsk] = useState<string>("");
   const [isAnimatedChat, setIsAnimatedChat] = useState<boolean>(false);
   const [awaitingAnswer, setAwaitingAnswer] = useState<boolean>(false);
+  const [justCreated, setJustCreated] = useState<boolean>(false);
   const [messages, setMessages] = useState([
     // { id: 1, content: "Olá! Como posso ajudar?", role: "model" },
     // { id: 2, content: "Quero montar um layout de chat!", role: "user" },
@@ -63,6 +64,7 @@ export default function IndexPage() {
         { id: prev.length + 1, content: data.answer, role: "model" },
       ]);
 
+      setJustCreated(true);
       navigate(`/${data.session_id}`);
     } else {
       setMessages((prev) => [
@@ -82,8 +84,23 @@ export default function IndexPage() {
   };
 
   useEffect(() => {
+    if (!id) {
+      // Sem sessão → limpar o chat
+      setMessages([]);
+      setIsAnimatedChat(false);
+
+      return;
+    }
+
+    if (justCreated) {
+      setJustCreated(false);
+
+      return;
+    }
+
+    setMessages([]);
     loadSession();
-  }, []);
+  }, [id]);
 
   return (
     <main className="max-w-full h-full flex flex-col justify-between">
