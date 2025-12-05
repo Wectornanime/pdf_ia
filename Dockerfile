@@ -19,5 +19,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia os arquivos gerados pelo Vite
 COPY --from=build-frontend /app/dist ./static
 
+# Porta definida pelo Render
+ENV PORT=8000
+
+EXPOSE 8000
+
 # Comando para rodar FastAPI servindo os estáticos
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
