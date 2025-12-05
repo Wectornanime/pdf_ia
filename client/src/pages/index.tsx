@@ -12,6 +12,7 @@ import {
 } from "@mui/icons-material";
 
 import { api } from "@/services/api";
+import { SessionMessage } from "@/types/api/sessionMessage";
 
 export default function IndexPage() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function IndexPage() {
   const [isAnimatedChat, setIsAnimatedChat] = useState<boolean>(false);
   const [awaitingAnswer, setAwaitingAnswer] = useState<boolean>(false);
   const [justCreated, setJustCreated] = useState<boolean>(false);
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<SessionMessage[]>([
     // { id: 1, content: "Olá! Como posso ajudar?", role: "model" },
     // { id: 2, content: "Quero montar um layout de chat!", role: "user" },
     // { id: 3, content: "Claro! Aqui está uma versão completa!", role: "model" },
@@ -34,7 +35,7 @@ export default function IndexPage() {
   const loadSession = async () => {
     if (id) {
       setAwaitingAnswer(true);
-      const { data } = await api.get(`session/${id}`);
+      const { data } = await api.get<SessionMessage[]>(`session/${id}`);
 
       setMessages(data);
       setAwaitingAnswer(false);
@@ -54,14 +55,18 @@ export default function IndexPage() {
     if (!id) {
       setMessages((prev) => [
         ...prev,
-        { id: prev.length + 1, content: ask, role: "user" },
+        { id: (prev.length + 1).toString(), content: ask, role: "user" },
       ]);
 
       const { data } = await api.post(`session`, { ask });
 
       setMessages((prev) => [
         ...prev,
-        { id: prev.length + 1, content: data.answer, role: "model" },
+        {
+          id: (prev.length + 1).toString(),
+          content: data.answer,
+          role: "model",
+        },
       ]);
 
       setJustCreated(true);
@@ -69,14 +74,18 @@ export default function IndexPage() {
     } else {
       setMessages((prev) => [
         ...prev,
-        { id: prev.length + 1, content: ask, role: "user" },
+        { id: (prev.length + 1).toString(), content: ask, role: "user" },
       ]);
 
       const { data } = await api.post(`session/${id}/ask`, { ask });
 
       setMessages((prev) => [
         ...prev,
-        { id: prev.length + 1, content: data.answer, role: "model" },
+        {
+          id: (prev.length + 1).toString(),
+          content: data.answer,
+          role: "model",
+        },
       ]);
     }
 

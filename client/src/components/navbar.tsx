@@ -20,16 +20,17 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon } from "@/components/icons";
 import { api } from "@/services/api";
+import { SessionList } from "@/types/api/sessioList";
 
 export const Navbar = () => {
-  const [sessions, setSessions] = useState([]);
+  const [sessions, setSessions] = useState<SessionList[]>([]);
   const [isLoadingSessions, setIsLoadingSessions] = useState<boolean>(true);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const getSessions = async () => {
     setIsLoadingSessions(true);
-    const { data } = await api.get("/session");
+    const { data } = await api.get<SessionList[]>("/session");
 
     setSessions(data);
     setIsLoadingSessions(false);
