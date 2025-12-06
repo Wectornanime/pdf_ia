@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,9 +12,12 @@ load_dotenv()
 check_temp_path()
 app = FastAPI()
 
+client_origin = os.getenv("FRONTEND_URL")
+
 origins = [
     "http://localhost:5173",
-    "http://localhost"
+    "http://localhost",
+    client_origin
 ]
 
 app.add_middleware(
